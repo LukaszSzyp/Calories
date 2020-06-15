@@ -1,34 +1,32 @@
-package pl.Lukasz.Calories;
+package pl.Lukasz.Calories.model;
 
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import pl.Lukasz.Calories.UserPrincipalDetailsServices;
+import pl.Lukasz.Calories.db.UserRepository;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .inMemoryAuthentication()
-                .withUser("admin").password(passwordEncoder().encode("admin")).roles("ADMIN")
-                .and()
-                .withUser("manager").password(passwordEncoder().encode("manager")).roles("MANAGER")
-                .and()
-                .withUser("user").password(passwordEncoder().encode("user")).roles("USER")
-                .and();
-    }
+    private UserPrincipalDetailsServices userPrincipalDetailsServices;
+    private UserRepository userRepository;
 
+    public WebSecurityConfig(UserPrincipalDetailsServices userPrincipalDetailsServices) {
+        this.userPrincipalDetailsServices = userPrincipalDetailsServices;
+    }
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) {
+        auth.
+                authenticationProvider(authenticationProvider());
+    }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -39,12 +37,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .httpBasic();
     }
+    @Bean
+    DaoAuthenticationProvider authenticationProvider(){
+        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
+        daoAuthenticationProvider.setUserDetailsService(this.userPrincipalDetailsServices);
 
+        return authenticationProvider();
+    }
     @Bean
     PasswordEncoder passwordEncoder (){
         return new BCryptPasswordEncoder();
     }
-
     /*
     @Override
     protected void configure(HttpSecurity http) throws Exception {

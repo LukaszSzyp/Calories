@@ -10,19 +10,20 @@ import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactor
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 
+
+
 @SpringBootApplication
 public class CaloriesApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(CaloriesApplication.class, args);
-
 	}
 
 	@Bean
 	public ServletWebServerFactory servletContainer(){
 	// Enable SSL Trafic
 		TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory() {
-
+			@Override
 			protected void postProcessContext(Context context) {
 				SecurityConstraint securityConstraint = new SecurityConstraint();
 				securityConstraint.setUserConstraint("CONFIDENTIAL");
