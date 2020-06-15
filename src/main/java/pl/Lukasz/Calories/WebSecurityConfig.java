@@ -1,6 +1,7 @@
 package pl.Lukasz.Calories;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -14,38 +15,55 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
+import javax.sql.DataSource;
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private DataSource dataSource;
+
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
-                .inMemoryAuthentication()
-                .withUser("admin").password(passwordEncoder().encode("admin")).roles("ADMIN")
-                .and()
-                .withUser("manager").password(passwordEncoder().encode("manager")).roles("MANAGER")
-                .and()
-                .withUser("user").password(passwordEncoder().encode("user")).roles("USER")
-                .and();
+                .jdbcAuthentication().passwordEncoder(new BCryptPasswordEncoder())
+                .dataSource(dataSource)
+                .usersByUsernameQuery("select username, password, enabled from users where username=?")
+                .authoritiesByUsernameQuery("select username, role from users where username=?");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin().permitAll()
+                .and()
+                .logout().permitAll();
+                /*
                 .antMatchers("/index").permitAll()
                 .antMatchers("/userIndex").hasAnyRole("USER","ADMIN")
                 .antMatchers("/managerIndex").hasAnyRole("MANAGER","ADMIN")
                 .and()
-                .httpBasic();
+                .httpBasic();*/
     }
 
+    @Autowired
+    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
+        auth.jdbcAuthentication().passwordEncoder(new BCryptPasswordEncoder())
+                .dataSource(dataSource)
+                .usersByUsernameQuery("select username, password, enabled from users where username=?")
+                .authoritiesByUsernameQuery("select username, role from users where username=?")
+        ;
+    }
+/*
     @Bean
     PasswordEncoder passwordEncoder (){
-        return new BCryptPasswordEncoder();
     }
 
-    /*
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -72,5 +90,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         .build();
 
         return new InMemoryUserDetailsManager(user);
-    }*/
+    }
+        return new BCryptPasswordEncoder();*/
 }
