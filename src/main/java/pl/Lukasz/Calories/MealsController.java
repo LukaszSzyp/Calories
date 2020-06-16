@@ -11,7 +11,7 @@ public class MealsController {
     @Autowired
     private MealsService service;
 
-    @GetMapping("/meal")
+    @GetMapping("/meals")
     public List<Meals> list() {
         return service.listAll();
     }
