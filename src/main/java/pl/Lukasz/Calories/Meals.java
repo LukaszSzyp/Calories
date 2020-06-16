@@ -7,9 +7,10 @@ import javax.persistence.Id;
 
 @Entity
 public class Meals {
+
     private Integer meals_id;
-    private String date;
-    private String time;
+    //private String date;
+    //private String time;
     private String text;
     private Integer calories;
     private Integer user_id;
@@ -17,8 +18,8 @@ public class Meals {
 
     public Meals(Integer meals_id, String date, String time, String text, Integer calories, Integer user_id) {
         this.meals_id = meals_id;
-        this.date = date;
-        this.time = time;
+        //this.date = date;
+        //this.time = time;
         this.text = text;
         this.calories = calories;
         this.user_id = user_id;
@@ -33,7 +34,7 @@ public class Meals {
     public void setMeals_id(Integer meals_id) {
         this.meals_id = meals_id;
     }
-
+/*
     public String getDate() {
         return date;
     }
@@ -48,7 +49,7 @@ public class Meals {
 
     public void setTime(String time) {
         this.time = time;
-    }
+    }*/
 
     public String getText() {
         return text;
@@ -73,4 +74,5 @@ public class Meals {
     public void setUser_id(Integer user_id) {
         this.user_id = user_id;
     }
+
 }

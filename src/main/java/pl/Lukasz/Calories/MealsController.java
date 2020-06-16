@@ -1,8 +1,7 @@
 package pl.Lukasz.Calories;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -12,7 +11,7 @@ public class MealsController {
     @Autowired
     private MealsService service;
 
-    @GetMapping("/meals")
+    @GetMapping("/meal")
     public List<Meals> list() {
         return service.listAll();
     }
