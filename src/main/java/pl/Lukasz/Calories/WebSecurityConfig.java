@@ -1,5 +1,5 @@
 package pl.Lukasz.Calories;
-
+/*
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -19,6 +19,8 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
+
+
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -48,7 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/userIndex").hasAnyRole("USER","ADMIN")
                 .antMatchers("/managerIndex").hasAnyRole("MANAGER","ADMIN")
                 .and()
-                .httpBasic();*/
+                .httpBasic();*//*
     }
 
     @Autowired
@@ -91,5 +93,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         return new InMemoryUserDetailsManager(user);
     }
-        return new BCryptPasswordEncoder();*/
+        return new BCryptPasswordEncoder();
 }
+*/
