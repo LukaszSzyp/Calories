@@ -32,6 +32,7 @@ public class MealsController {
             return new ResponseEntity<Meals>(HttpStatus.NOT_FOUND);
         }
     }
+
     @PostMapping("/meals/{id}")
     public ResponseEntity<?> update(@RequestBody Meals meals, @PathVariable Integer id) {
         try {

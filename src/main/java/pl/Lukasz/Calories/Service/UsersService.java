@@ -18,4 +18,16 @@ public class UsersService {
     public List<Users> listAll() {
         return usersRepository.findAll();
     }
+
+    public void save(Users users){
+        usersRepository.save(users);
+    }
+
+    public Users get(Integer userId) {
+        return usersRepository.findById(userId).get();
+    }
+
+    public void delete (Integer userId) {
+        usersRepository.deleteById(userId);
+    }
 }
