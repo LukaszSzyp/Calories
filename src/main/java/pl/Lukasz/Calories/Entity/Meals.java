@@ -1,11 +1,9 @@
-package pl.Lukasz.Calories;
+package pl.Lukasz.Calories.Entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name="meals")
 public class Meals {
 
     private Integer id;
@@ -14,7 +12,6 @@ public class Meals {
     private String text;
     private Integer calories;
     private Integer user;
-
 
     public Meals(){
     }

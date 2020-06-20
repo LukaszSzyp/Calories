@@ -1,9 +1,10 @@
-package pl.Lukasz.Calories;
+package pl.Lukasz.Calories.Service;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
+import pl.Lukasz.Calories.Entity.Meals;
+import pl.Lukasz.Calories.Repository.MealsRepository;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -16,7 +17,7 @@ public class MealsService {
     private MealsRepository repo;
 
     public List<Meals> listAll(Integer user) {
-        return repo.findByUser(user);
+       return repo.findByUser(user);
     }
 
     public void save(Meals meals){

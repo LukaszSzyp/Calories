@@ -1,17 +1,20 @@
-package pl.Lukasz.Calories;
+package pl.Lukasz.Calories.Controller;
 
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.Lukasz.Calories.Entity.Meals;
+import pl.Lukasz.Calories.Entity.Users;
+import pl.Lukasz.Calories.Service.MealsService;
+import pl.Lukasz.Calories.Service.UsersService;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
 public class MealsController {
-
     @Autowired
     private MealsService service;
 
@@ -49,5 +52,4 @@ public class MealsController {
     public void delete(@PathVariable Integer id) {
         service.delete(id);
     }
-
 }
