@@ -13,19 +13,19 @@ public class Meals {
     private String time;
     private String text;
     private Integer calories;
-    private Integer user_id;
+    private Integer user;
 
 
     public Meals(){
     }
 
-    public Meals(Integer id, String date, String time, String text, Integer calories, Integer user_id) {
+    public Meals(Integer id, String date, String time, String text, Integer calories, Integer user) {
         this.id = id;
         this.date = date;
         this.time = time;
         this.text = text;
         this.calories = calories;
-        this.user_id = user_id;
+        this.user = user;
     }
 
 
@@ -71,11 +71,11 @@ public class Meals {
         this.calories = calories;
     }
 
-    public Integer getUser_id() {
-        return user_id;
+    public Integer getUser() {
+        return user;
     }
 
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
+    public void setUser(Integer user) {
+        this.user = user;
     }
 }

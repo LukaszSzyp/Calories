@@ -1,6 +1,7 @@
 package pl.Lukasz.Calories;
 
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,8 +16,8 @@ public class MealsController {
     private MealsService service;
 
     @GetMapping("/meals")
-    public List<Meals> list() {
-        return service.listAll();
+    public List<Meals> list(@Param("user") Integer user) {
+        return service.listAll(user);
     }
 
     @GetMapping("/meals/{id}")
