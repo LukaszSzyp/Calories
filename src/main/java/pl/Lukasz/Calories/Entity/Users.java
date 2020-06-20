@@ -1,25 +1,23 @@
 package pl.Lukasz.Calories.Entity;
 
-import org.springframework.boot.SpringApplication;
-
 import javax.persistence.*;
 
 @Entity
 @Table(name="users")
 public class Users {
 
-    private Integer userId;
-    private String userName;
+    private Integer userid;
+    private String username;
     private String password;
     private String role;
-    private Integer enabled;
+    private Boolean enabled;
 
     public Users(){
     }
 
-    public Users(Integer userId, String userName, String password, String role, Integer enabled) {
-        this.userId = userId;
-        this.userName = userName;
+    public Users(Integer userid, String username, String password, String role, Boolean enabled) {
+        this.userid = userid;
+        this.username = username;
         this.password = password;
         this.role = role;
         this.enabled = enabled;
@@ -27,20 +25,21 @@ public class Users {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer getUserId() {
-        return userId;
+
+    public Integer getUserid() {
+        return userid;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUserid(Integer userid) {
+        this.userid = userid;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -59,11 +58,11 @@ public class Users {
         this.role = role;
     }
 
-    public Integer getEnabled() {
+    public Boolean getEnabled() {
         return enabled;
     }
 
-    public void setEnabled(Integer enabled) {
+    public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
     }
 }

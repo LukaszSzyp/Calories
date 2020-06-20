@@ -17,5 +17,6 @@ public class UsersController {
     @GetMapping("/users")
     public List<Users> listAll(){
         return usersService.listAll();
+
     }
 }
