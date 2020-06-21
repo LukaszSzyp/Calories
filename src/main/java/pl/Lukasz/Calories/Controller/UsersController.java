@@ -47,6 +47,11 @@ public class UsersController {
         usersService.save(users);
     }
 
+    @PostMapping("/newAccount")
+    public void addNewAccount(@RequestBody Users users) {
+        usersService.save(users);
+    }
+
     @DeleteMapping("/users/{id}")
     public void delete(@PathVariable Integer id) {
         usersService.delete(id);
