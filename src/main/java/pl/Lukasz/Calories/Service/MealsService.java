@@ -31,4 +31,12 @@ public class MealsService {
     public void delete (Integer meals_id){
         repo.deleteById(meals_id);
     }
+
+    public List<Meals> findMeals (String dateFrom, String dateTo, String timeFrom, String timeTo, Integer user){
+        return repo.findMeals(dateFrom, dateTo, timeFrom, timeTo, user);
+    }
+
+    public Integer sumCaloriesToday (){
+        return repo.sumCaloriesToday();
+    }
 }

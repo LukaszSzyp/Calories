@@ -23,6 +23,11 @@ public class MealsController {
         return service.listAll(user);
     }
 
+    @GetMapping("/meals/calories")
+    public Integer sumCaloriesToday(){
+        return service.sumCaloriesToday();
+    }
+
     @GetMapping("/meals/{id}")
     public ResponseEntity<Meals> get(@PathVariable Integer id) {
         try {
@@ -31,6 +36,11 @@ public class MealsController {
         } catch (NoSuchElementException e) {
             return new ResponseEntity<Meals>(HttpStatus.NOT_FOUND);
         }
+    }
+
+    @GetMapping("/meals/find")
+    public List<Meals> findMeals(@Param("dateFrom") String dateFrom, @Param("dateTo") String dateTo, @Param("timeFrom") String timeFrom, @Param("timeTo") String timeTo, @Param("user") Integer user ){
+        return service.findMeals(dateFrom, dateTo, timeFrom, timeTo, user);
     }
 
     @PostMapping("/meals/{id}")
