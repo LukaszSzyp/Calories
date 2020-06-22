@@ -3,6 +3,7 @@ package pl.Lukasz.Calories;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+
 @SpringBootApplication
 public class CaloriesApplication {
 
